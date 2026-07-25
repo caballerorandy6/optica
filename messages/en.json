@@ -1,0 +1,92 @@
+{
+  "Metadata": {
+    "title": "MIRA Eyewear — Glasses & Frames in Houston, TX",
+    "description": "Independent eyewear boutique in Houston, TX. Prescription glasses, designer frames and virtual try-on. Se habla español."
+  },
+  "Header": {
+    "topbar": "Free shipping in Houston · Envío gratis en Houston",
+    "frames": "Frames",
+    "bestsellers": "Bestsellers",
+    "about": "About",
+    "cta": "Shop frames",
+    "switchLocale": "Switch language to Spanish"
+  },
+  "Footer": {
+    "tagline": "Mira. It means look. Independent eyewear in {city}.",
+    "shop": "Shop",
+    "allFrames": "All frames",
+    "bestsellers": "Bestsellers",
+    "contact": "Contact",
+    "rights": "All rights reserved."
+  },
+  "Home": {
+    "eyebrow": "Independent eyewear · {city}",
+    "titleStart": "Mira.",
+    "titleAccent": "It means look.",
+    "sub": "Frames chosen one by one, fitted in Houston, priced honestly. Find a pair that looks like you — then try it on without leaving your couch.",
+    "ctaShop": "Shop all frames",
+    "ctaBestsellers": "See bestsellers",
+    "bestsellersTitle": "Bestsellers",
+    "viewAll": "View all",
+    "collectionsTitle": "Shop by collection",
+    "valueRxTitle": "Prescription-ready",
+    "valueRxDetail": "Every frame fits single-vision Rx lenses.",
+    "valueLocalTitle": "Houston local",
+    "valueLocalDetail": "Fitted and adjusted here, not shipped from overseas.",
+    "valueBilingualTitle": "Se habla español",
+    "valueBilingualDetail": "Full service in Spanish and English."
+  },
+  "Catalog": {
+    "metaTitle": "Frames",
+    "metaDescription": "Browse prescription-ready eyeglasses frames in Houston, TX. Filter by collection, material and color.",
+    "title": "Frames",
+    "bestsellers": "Bestsellers",
+    "count": "{count, plural, one {# frame} other {# frames}} — every pair prescription-ready.",
+    "emptyTitle": "No frames match those filters.",
+    "emptyHint": "Try removing a filter, or",
+    "browseAll": "browse everything",
+    "prev": "← Previous",
+    "next": "Next →",
+    "pageOf": "Page {page} of {pages}",
+    "filtersLabel": "Filters",
+    "collection": "Collection",
+    "material": "Material",
+    "color": "Color",
+    "clear": "Clear all filters",
+    "colorFilter": "Filter by color {color}"
+  },
+  "Card": {
+    "bestseller": "Bestseller",
+    "photoSoon": "Photo coming soon",
+    "colorsAvailable": "{count, plural, one {# color available} other {# colors available}}"
+  },
+  "Product": {
+    "framesCrumb": "Frames",
+    "colorLabel": "Color — {color}",
+    "colorOption": "Color {color}",
+    "viewPhoto": "View photo: {alt}",
+    "size": "Size",
+    "sizeUnits": "(lens · bridge · temple, mm)",
+    "material": "{material} frame",
+    "lowStock": "Only {count} left in this color",
+    "outOfStock": "Out of stock in this color",
+    "cta": "Select lenses — coming soon",
+    "ctaNote": "Cart, prescription lenses and checkout land in the next milestone.",
+    "moreFrom": "More from {collection}",
+    "photoSoon": "Photo coming soon",
+    "defaultAlt": "{name} frame in {color}",
+    "metaDescription": "{name} eyeglasses frame, available in {count, plural, one {# color} other {# colors}}. Prescription-ready in Houston, TX.",
+    "notFound": "Frame not found"
+  },
+  "About": {
+    "metaTitle": "About",
+    "metaDescription": "The story behind {name}, an independent eyewear boutique in {city}.",
+    "eyebrow": "About us",
+    "titleStart": "Mira.",
+    "titleAccent": "It means look.",
+    "p1": "{name} is an independent eyewear boutique in {city}. We pick every frame ourselves, fit it in person, and price it honestly — no license fees, no markup games.",
+    "p2": "Somos una óptica independiente en Houston. Te atendemos en español o inglés, en línea o en persona.",
+    "visitTitle": "Visit or reach us",
+    "cta": "Browse the frames"
+  }
+}

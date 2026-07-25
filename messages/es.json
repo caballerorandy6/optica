@@ -1,0 +1,92 @@
+{
+  "Metadata": {
+    "title": "MIRA Eyewear — Lentes y monturas en Houston, TX",
+    "description": "Óptica independiente en Houston, TX. Lentes con fórmula, monturas de diseño y prueba virtual. Atención en español e inglés."
+  },
+  "Header": {
+    "topbar": "Envío gratis en Houston · Free shipping in Houston",
+    "frames": "Monturas",
+    "bestsellers": "Más vendidas",
+    "about": "Nosotros",
+    "cta": "Ver monturas",
+    "switchLocale": "Cambiar idioma a inglés"
+  },
+  "Footer": {
+    "tagline": "Mira. Óptica independiente en {city}.",
+    "shop": "Tienda",
+    "allFrames": "Todas las monturas",
+    "bestsellers": "Más vendidas",
+    "contact": "Contacto",
+    "rights": "Todos los derechos reservados."
+  },
+  "Home": {
+    "eyebrow": "Óptica independiente · {city}",
+    "titleStart": "Mira.",
+    "titleAccent": "Encuentra tu par.",
+    "sub": "Monturas elegidas una por una, ajustadas en Houston y con precios honestos. Encuentra un par que se vea como tú — y pruébatelo sin salir de casa.",
+    "ctaShop": "Ver todas las monturas",
+    "ctaBestsellers": "Ver más vendidas",
+    "bestsellersTitle": "Más vendidas",
+    "viewAll": "Ver todas",
+    "collectionsTitle": "Compra por colección",
+    "valueRxTitle": "Listas para tu fórmula",
+    "valueRxDetail": "Toda montura acepta micas con fórmula monofocal.",
+    "valueLocalTitle": "Locales de Houston",
+    "valueLocalDetail": "Ajustadas aquí mismo, no enviadas desde el extranjero.",
+    "valueBilingualTitle": "We speak English",
+    "valueBilingualDetail": "Atención completa en español e inglés."
+  },
+  "Catalog": {
+    "metaTitle": "Monturas",
+    "metaDescription": "Explora monturas listas para fórmula en Houston, TX. Filtra por colección, material y color.",
+    "title": "Monturas",
+    "bestsellers": "Más vendidas",
+    "count": "{count, plural, one {# montura} other {# monturas}} — todas listas para tu fórmula.",
+    "emptyTitle": "Ninguna montura coincide con esos filtros.",
+    "emptyHint": "Prueba quitando un filtro, o",
+    "browseAll": "explora todo el catálogo",
+    "prev": "← Anterior",
+    "next": "Siguiente →",
+    "pageOf": "Página {page} de {pages}",
+    "filtersLabel": "Filtros",
+    "collection": "Colección",
+    "material": "Material",
+    "color": "Color",
+    "clear": "Quitar todos los filtros",
+    "colorFilter": "Filtrar por color {color}"
+  },
+  "Card": {
+    "bestseller": "Más vendida",
+    "photoSoon": "Foto próximamente",
+    "colorsAvailable": "{count, plural, one {# color disponible} other {# colores disponibles}}"
+  },
+  "Product": {
+    "framesCrumb": "Monturas",
+    "colorLabel": "Color — {color}",
+    "colorOption": "Color {color}",
+    "viewPhoto": "Ver foto: {alt}",
+    "size": "Medidas",
+    "sizeUnits": "(mica · puente · varilla, en mm)",
+    "material": "Montura de {material}",
+    "lowStock": "Solo {count} en este color",
+    "outOfStock": "Agotado en este color",
+    "cta": "Elegir micas — próximamente",
+    "ctaNote": "Carrito, micas con fórmula y pago en línea llegan en el siguiente hito.",
+    "moreFrom": "Más de {collection}",
+    "photoSoon": "Foto próximamente",
+    "defaultAlt": "Montura {name} en color {color}",
+    "metaDescription": "Montura {name}, disponible en {count, plural, one {# color} other {# colores}}. Lista para tu fórmula en Houston, TX.",
+    "notFound": "Montura no encontrada"
+  },
+  "About": {
+    "metaTitle": "Nosotros",
+    "metaDescription": "La historia de {name}, una óptica independiente en {city}.",
+    "eyebrow": "Nosotros",
+    "titleStart": "Mira.",
+    "titleAccent": "Encuentra tu par.",
+    "p1": "{name} es una óptica independiente en {city}. Elegimos cada montura nosotros mismos, la ajustamos en persona y la cobramos con honestidad — sin licencias de marca ni juegos de precios.",
+    "p2": "We are an independent optical boutique in Houston. We serve you in Spanish or English, online or in person.",
+    "visitTitle": "Visítanos o escríbenos",
+    "cta": "Explorar las monturas"
+  }
+}

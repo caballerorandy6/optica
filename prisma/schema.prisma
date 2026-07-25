@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Shape {
+  ROUND
+  SQUARE
+  RECTANGLE
+  CATEYE
+  AVIATOR
+  BROWLINE
+  OVAL
+  OTHER
+}
+
+enum Gender {
+  MEN
+  WOMEN
+  UNISEX
+  KIDS
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FULFILLED
+  CANCELLED
+}
+
+enum LensOption {
+  FRAME_ONLY
+  BASIC
+  ANTI_REFLECTIVE
+  BLUE_LIGHT
+}
+
+model Product {
+  id          String         @id @default(cuid())
+  capriId     Int?           @unique
+  sku         String         @unique
+  name        String
+  slug        String         @unique
+  description String         @default("")
+  shape       Shape?
+  material    String?
+  gender      Gender?
+  priceCents  Int            @default(0)
+  published   Boolean        @default(false)
+  featured    Boolean        @default(false)
+  categories  Category[]
+  variants    Variant[]
+  images      ProductImage[]
+  orderItems  OrderItem[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@index([published, featured])
+}
+
+model Variant {
+  id         String      @id @default(cuid())
+  capriId    Int?        @unique
+  productId  String
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  color      String
+  colorSlug  String
+  size       String?
+  stock      Int         @default(0)
+  imageUrl   String?
+  orderItems OrderItem[]
+
+  @@unique([productId, colorSlug])
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String  @default("")
+  position  Int     @default(0)
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  capriId  Int?      @unique
+  name     String
+  slug     String    @unique
+  products Product[]
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  number          Int         @unique @default(autoincrement())
+  email           String
+  name            String
+  phone           String?
+  status          OrderStatus @default(PENDING)
+  totalCents      Int
+  currency        String      @default("usd")
+  stripeSessionId String?     @unique
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id           String     @id @default(cuid())
+  orderId      String
+  order        Order      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId    String?
+  product      Product?   @relation(fields: [productId], references: [id], onDelete: SetNull)
+  variantId    String?
+  variant      Variant?   @relation(fields: [variantId], references: [id], onDelete: SetNull)
+  nameSnapshot String
+  priceCents   Int
+  quantity     Int        @default(1)
+  lensOption   LensOption @default(FRAME_ONLY)
+  rxData       Json?
+}
