@@ -13,3 +13,17 @@ export const SITE = {
 } as const
 
 export const FREE_SHIPPING_THRESHOLD_CENTS = 5000
+
+/**
+ * Opciones de micas del wizard simplificado (acordado en el paquete).
+ * Precios de PRUEBA — el cliente definirá los reales.
+ * Las keys coinciden con el enum LensOption de Prisma.
+ */
+export const LENS_OPTIONS = [
+  { id: "FRAME_ONLY", priceCents: 0 },
+  { id: "BASIC", priceCents: 3000 },
+  { id: "ANTI_REFLECTIVE", priceCents: 6000 },
+  { id: "BLUE_LIGHT", priceCents: 5000 },
+] as const
+
+export type LensOptionId = (typeof LENS_OPTIONS)[number]["id"]

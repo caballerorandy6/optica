@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { useTranslations } from "next-intl"
 
+import { AddToCartForm } from "@/components/product/add-to-cart-form"
 import { swatchBackground } from "@/lib/colors"
 
 type GalleryImage = { id: string; url: string; alt: string }
@@ -17,16 +18,17 @@ type GalleryVariant = {
 }
 
 export function FrameGallery({
-  name,
+  product,
   images,
   variants,
   children,
 }: {
-  name: string
+  product: { id: string; slug: string; name: string; priceCents: number }
   images: GalleryImage[]
   variants: GalleryVariant[]
   children?: React.ReactNode
 }) {
+  const { name } = product
   const t = useTranslations("Product")
   const tc = useTranslations("Colors")
   const colorName = (v: GalleryVariant | null) =>
@@ -130,16 +132,7 @@ export function FrameGallery({
           <p className="mt-2 text-sm text-muted">{t("outOfStock")}</p>
         )}
 
-        <div className="mt-6 space-y-3">
-          <button
-            type="button"
-            disabled
-            className="w-full cursor-not-allowed rounded-full bg-accent px-6 py-3 font-medium text-accent-ink opacity-60"
-          >
-            {t("cta")}
-          </button>
-          <p className="text-center text-xs text-muted">{t("ctaNote")}</p>
-        </div>
+        <AddToCartForm product={product} variant={variant} />
       </div>
     </div>
   )

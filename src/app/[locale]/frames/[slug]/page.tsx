@@ -63,7 +63,16 @@ export default async function FramePage({ params }: { params: Params }) {
         <span className="text-ink">{frame.name}</span>
       </nav>
 
-      <FrameGallery name={frame.name} images={frame.images} variants={frame.variants}>
+      <FrameGallery
+        product={{
+          id: frame.id,
+          slug: frame.slug,
+          name: frame.name,
+          priceCents: frame.priceCents,
+        }}
+        images={frame.images}
+        variants={frame.variants}
+      >
         <div className="mb-6">
           {collection && (
             <p className="text-xs uppercase tracking-widest text-muted">{collection.name}</p>

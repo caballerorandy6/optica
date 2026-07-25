@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl"
 
+import { CartButton } from "@/components/cart/cart-button"
 import { LocaleSwitcher } from "@/components/layout/locale-switcher"
 import { Link } from "@/i18n/navigation"
 import { SITE } from "@/lib/constants"
@@ -37,9 +38,10 @@ export function Header() {
           </nav>
           <div className="flex items-center gap-2">
             <LocaleSwitcher />
+            <CartButton />
             <Link
               href="/frames"
-              className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
+              className="hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90 sm:block"
             >
               {t("cta")}
             </Link>
