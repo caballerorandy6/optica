@@ -6,6 +6,7 @@ import { SITE } from "@/lib/constants"
 
 export function Header() {
   const t = useTranslations("Header")
+  const ta = useTranslations("A11y")
 
   return (
     <header className="sticky top-0 z-40">
@@ -20,7 +21,7 @@ export function Header() {
             {SITE.name}
             <span className="text-amber">.</span>
           </Link>
-          <nav aria-label="Main" className="hidden gap-6 text-sm sm:flex">
+          <nav aria-label={ta("mainNav")} className="hidden gap-6 text-sm sm:flex">
             <Link href="/frames" className="text-muted transition-colors hover:text-ink">
               {t("frames")}
             </Link>

@@ -5,6 +5,7 @@ import { SITE } from "@/lib/constants"
 
 export function Footer() {
   const t = useTranslations("Footer")
+  const ta = useTranslations("A11y")
 
   return (
     <footer className="mt-auto border-t border-line bg-paper">
@@ -16,7 +17,7 @@ export function Footer() {
           </p>
           <p className="mt-2 text-sm text-muted">{t("tagline", { city: SITE.city })}</p>
         </div>
-        <nav aria-label="Footer" className="text-sm">
+        <nav aria-label={ta("footerNav")} className="text-sm">
           <p className="mb-2 font-medium">{t("shop")}</p>
           <ul className="space-y-1 text-muted">
             <li>

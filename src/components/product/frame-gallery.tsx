@@ -28,6 +28,9 @@ export function FrameGallery({
   children?: React.ReactNode
 }) {
   const t = useTranslations("Product")
+  const tc = useTranslations("Colors")
+  const colorName = (v: GalleryVariant | null) =>
+    v ? (tc.has(v.colorSlug) ? tc(v.colorSlug) : v.color) : "—"
   const [variant, setVariant] = useState(variants[0] ?? null)
   const [imageOverride, setImageOverride] = useState<string | null>(null)
 
@@ -45,7 +48,7 @@ export function FrameGallery({
           {mainSrc ? (
             <Image
               src={mainSrc}
-              alt={t("defaultAlt", { name, color: variant?.color ?? "—" })}
+              alt={t("defaultAlt", { name, color: colorName(variant) })}
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -87,7 +90,7 @@ export function FrameGallery({
         {variants.length > 0 && (
           <fieldset>
             <legend className="mb-2 text-xs font-medium uppercase tracking-widest text-muted">
-              {t("colorLabel", { color: variant?.color ?? "—" })}
+              {t("colorLabel", { color: colorName(variant) })}
             </legend>
             <div className="flex flex-wrap gap-2">
               {variants.map((v) => (
@@ -96,8 +99,8 @@ export function FrameGallery({
                   type="button"
                   onClick={() => selectVariant(v)}
                   aria-pressed={variant?.id === v.id}
-                  aria-label={t("colorOption", { color: v.color })}
-                  title={v.color}
+                  aria-label={t("colorOption", { color: colorName(v) })}
+                  title={colorName(v)}
                   className={
                     variant?.id === v.id
                       ? "rounded-full ring-2 ring-accent ring-offset-2 ring-offset-paper"

@@ -78,6 +78,58 @@
     "metaDescription": "Montura {name}, disponible en {count, plural, one {# color} other {# colores}}. Lista para tu fórmula en Houston, TX.",
     "notFound": "Montura no encontrada"
   },
+  "A11y": {
+    "mainNav": "Navegación principal",
+    "footerNav": "Enlaces del pie de página",
+    "breadcrumb": "Ruta de navegación",
+    "pagination": "Paginación"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "message": "La página que buscas no existe o ya no está disponible.",
+    "cta": "Volver al inicio",
+    "ctaFrames": "Ver las monturas"
+  },
+  "Colors": {
+    "black": "Negro",
+    "brown": "Café",
+    "coffee": "Café oscuro",
+    "gunmetal": "Gris plomo",
+    "gold": "Dorado",
+    "black-gold": "Negro y dorado",
+    "tortoise": "Carey",
+    "tortoise-gold": "Carey y dorado",
+    "demi": "Demi",
+    "burgundy": "Vino",
+    "wine": "Vino",
+    "red": "Rojo",
+    "pink": "Rosa",
+    "rose": "Rosado",
+    "purple": "Morado",
+    "blue": "Azul",
+    "navy": "Azul marino",
+    "teal": "Verde azulado",
+    "green": "Verde",
+    "olive": "Oliva",
+    "grey": "Gris",
+    "gray": "Gris",
+    "silver": "Plateado",
+    "ink": "Tinta",
+    "crystal": "Cristal",
+    "clear": "Transparente",
+    "white": "Blanco",
+    "cream": "Crema",
+    "multi": "Multicolor"
+  },
+  "Materials": {
+    "metal": "Metal",
+    "acetate": "Acetato",
+    "injection": "Inyectado",
+    "memory": "Memory metal",
+    "plastic": "Plástico",
+    "titanium": "Titanio",
+    "stainless steel": "Acero inoxidable"
+  },
   "About": {
     "metaTitle": "Nosotros",
     "metaDescription": "La historia de {name}, una óptica independiente en {city}.",

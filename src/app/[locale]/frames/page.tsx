@@ -34,8 +34,9 @@ export default async function FramesPage({
   searchParams: SearchParams
 }) {
   const filters = parseFilters(await searchParams)
-  const [t, { frames, total, page, pages }, options] = await Promise.all([
+  const [t, ta, { frames, total, page, pages }, options] = await Promise.all([
     getTranslations("Catalog"),
+    getTranslations("A11y"),
     getFrames(filters),
     getFilterOptions(),
   ])
@@ -74,7 +75,7 @@ export default async function FramesPage({
 
           {pages > 1 && (
             <nav
-              aria-label="Pagination"
+              aria-label={ta("pagination")}
               className="mt-10 flex items-center justify-center gap-2"
             >
               {page > 1 && (

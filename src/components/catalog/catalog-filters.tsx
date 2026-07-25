@@ -50,6 +50,8 @@ export function CatalogFilters({
   options: FilterOptions
 }) {
   const t = useTranslations("Catalog")
+  const tc = useTranslations("Colors")
+  const tm = useTranslations("Materials")
   const hasFilters =
     filters.collection || filters.material || filters.color || filters.featured
 
@@ -88,7 +90,7 @@ export function CatalogFilters({
                 active={active}
                 href={catalogHref(filters, { material: active ? undefined : m })}
               >
-                {m}
+                {tm.has(m.toLowerCase()) ? tm(m.toLowerCase()) : m}
               </Chip>
             )
           })}
@@ -102,11 +104,12 @@ export function CatalogFilters({
         <div className="flex flex-wrap gap-2">
           {options.colors.map((c) => {
             const active = filters.color === c.colorSlug
+            const colorName = tc.has(c.colorSlug) ? tc(c.colorSlug) : c.color
             return (
               <Link
                 key={c.colorSlug}
-                title={c.color}
-                aria-label={t("colorFilter", { color: c.color })}
+                title={colorName}
+                aria-label={t("colorFilter", { color: colorName })}
                 aria-current={active ? "true" : undefined}
                 href={catalogHref(filters, { color: active ? undefined : c.colorSlug })}
                 className={

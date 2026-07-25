@@ -78,6 +78,58 @@
     "metaDescription": "{name} eyeglasses frame, available in {count, plural, one {# color} other {# colors}}. Prescription-ready in Houston, TX.",
     "notFound": "Frame not found"
   },
+  "A11y": {
+    "mainNav": "Main navigation",
+    "footerNav": "Footer links",
+    "breadcrumb": "Breadcrumb",
+    "pagination": "Pagination"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "message": "The page you are looking for does not exist or is no longer available.",
+    "cta": "Back to home",
+    "ctaFrames": "Browse frames"
+  },
+  "Colors": {
+    "black": "Black",
+    "brown": "Brown",
+    "coffee": "Coffee",
+    "gunmetal": "Gunmetal",
+    "gold": "Gold",
+    "black-gold": "Black & gold",
+    "tortoise": "Tortoise",
+    "tortoise-gold": "Tortoise & gold",
+    "demi": "Demi",
+    "burgundy": "Burgundy",
+    "wine": "Wine",
+    "red": "Red",
+    "pink": "Pink",
+    "rose": "Rose",
+    "purple": "Purple",
+    "blue": "Blue",
+    "navy": "Navy",
+    "teal": "Teal",
+    "green": "Green",
+    "olive": "Olive",
+    "grey": "Grey",
+    "gray": "Gray",
+    "silver": "Silver",
+    "ink": "Ink",
+    "crystal": "Crystal",
+    "clear": "Clear",
+    "white": "White",
+    "cream": "Cream",
+    "multi": "Multicolor"
+  },
+  "Materials": {
+    "metal": "Metal",
+    "acetate": "Acetate",
+    "injection": "Injection",
+    "memory": "Memory metal",
+    "plastic": "Plastic",
+    "titanium": "Titanium",
+    "stainless steel": "Stainless steel"
+  },
   "About": {
     "metaTitle": "About",
     "metaDescription": "The story behind {name}, an independent eyewear boutique in {city}.",

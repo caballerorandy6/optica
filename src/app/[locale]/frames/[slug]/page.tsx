@@ -27,8 +27,17 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function FramePage({ params }: { params: Params }) {
   const { slug } = await params
-  const [t, frame] = await Promise.all([getTranslations("Product"), getFrameBySlug(slug)])
+  const [t, ta, tm, frame] = await Promise.all([
+    getTranslations("Product"),
+    getTranslations("A11y"),
+    getTranslations("Materials"),
+    getFrameBySlug(slug),
+  ])
   if (!frame) notFound()
+
+  const materialKey = frame.material?.toLowerCase()
+  const materialName =
+    materialKey && tm.has(materialKey) ? tm(materialKey) : frame.material
 
   const collection = frame.categories.find((c) => c.slug !== "new-releases")
   const { frames: related } = collection
@@ -38,7 +47,7 @@ export default async function FramePage({ params }: { params: Params }) {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10">
-      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-muted">
+      <nav aria-label={ta("breadcrumb")} className="mb-6 text-sm text-muted">
         <Link href="/frames" className="hover:text-ink">
           {t("framesCrumb")}
         </Link>
@@ -63,9 +72,9 @@ export default async function FramePage({ params }: { params: Params }) {
             {frame.name}
           </h1>
           <p className="mt-3 text-2xl">{formatPrice(frame.priceCents)}</p>
-          {frame.material && (
+          {materialName && (
             <p className="mt-1 text-sm text-muted">
-              {t("material", { material: frame.material })}
+              {t("material", { material: materialName })}
             </p>
           )}
           {frame.description && (

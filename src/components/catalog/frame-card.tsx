@@ -8,6 +8,7 @@ import { formatPrice } from "@/lib/format"
 
 export function FrameCard({ frame }: { frame: FrameListItem }) {
   const t = useTranslations("Card")
+  const tc = useTranslations("Colors")
   const image = frame.images[0]
   const collection = frame.categories.find((c) => c.slug !== "new-releases")
 
@@ -47,7 +48,7 @@ export function FrameCard({ frame }: { frame: FrameListItem }) {
             {frame.variants.slice(0, 4).map((v) => (
               <span
                 key={v.id}
-                title={v.color}
+                title={tc.has(v.colorSlug) ? tc(v.colorSlug) : v.color}
                 className="size-3.5 rounded-full border border-card-line"
                 style={{ background: swatchBackground(v.colorSlug) }}
               />
