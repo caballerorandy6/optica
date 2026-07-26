@@ -71,6 +71,13 @@ export async function shipOrder(
     },
   })
   if (count === 0) return { ok: false, error: "El pedido ya no está en 'Pagado'" }
+
+  const order = await prisma.order.findUnique({ where: { id }, include: { items: true } })
+  if (order) {
+    const { sendOrderShipped } = await import("@/lib/email")
+    await sendOrderShipped(order)
+  }
+
   revalidatePath("/admin/orders")
   return { ok: true }
 }

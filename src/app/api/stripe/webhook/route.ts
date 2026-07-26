@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import type Stripe from "stripe"
 
+import { sendOrderConfirmation } from "@/lib/email"
 import { prisma } from "@/lib/prisma"
 import { getStripe } from "@/lib/stripe"
 
@@ -48,6 +49,12 @@ export async function POST(request: Request) {
           data: { stock: { decrement: item.quantity } },
         })
       }
+
+      const order = await prisma.order.findUnique({
+        where: { id: orderId },
+        include: { items: true },
+      })
+      if (order) await sendOrderConfirmation(order)
     }
   }
 

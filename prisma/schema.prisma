@@ -104,6 +104,7 @@ model Order {
   status          OrderStatus @default(PENDING)
   totalCents      Int
   currency        String      @default("usd")
+  locale          String      @default("es")
   stripeSessionId String?     @unique
   carrier         String?
   trackingNumber  String?

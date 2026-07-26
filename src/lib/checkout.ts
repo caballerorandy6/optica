@@ -64,6 +64,7 @@ export async function createCheckoutSession(input: CheckoutInput): Promise<Check
     data: {
       email: "",
       name: "",
+      locale,
       totalCents,
       items: {
         create: lines.map(({ variant, item, unitCents }) => ({
