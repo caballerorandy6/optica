@@ -47,7 +47,7 @@ export default async function FramesPage({
         <h1 className="font-display text-4xl font-medium tracking-tight">
           {filters.featured ? t("bestsellers") : t("title")}
         </h1>
-        <p className="mt-2 text-muted">{t("count", { count: total })}</p>
+        <p className="mt-2 text-muted-ink">{t("count", { count: total })}</p>
       </header>
 
       <div className="grid gap-10 lg:grid-cols-[240px_1fr]">
@@ -57,7 +57,7 @@ export default async function FramesPage({
           {frames.length === 0 ? (
             <div className="rounded-2xl border border-line p-10 text-center">
               <p className="font-display text-xl">{t("emptyTitle")}</p>
-              <p className="mt-2 text-sm text-muted">
+              <p className="mt-2 text-sm text-muted-ink">
                 {t("emptyHint")}{" "}
                 <Link href="/frames" className="text-accent underline underline-offset-4">
                   {t("browseAll")}
@@ -86,7 +86,7 @@ export default async function FramesPage({
                   {t("prev")}
                 </Link>
               )}
-              <span className="px-2 text-sm text-muted">{t("pageOf", { page, pages })}</span>
+              <span className="px-2 text-sm text-muted-ink">{t("pageOf", { page, pages })}</span>
               {page < pages && (
                 <Link
                   href={catalogHref(filters, { page: page + 1 })}

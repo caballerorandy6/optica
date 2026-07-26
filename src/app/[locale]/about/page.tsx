@@ -26,13 +26,13 @@ export default async function AboutPage() {
       <h1 className="mt-3 font-display text-5xl font-medium tracking-tight">
         {t("titleStart")} <em className="text-accent">{t("titleAccent")}</em>
       </h1>
-      <div className="mt-6 space-y-4 leading-relaxed text-muted">
+      <div className="mt-6 space-y-4 leading-relaxed text-muted-ink">
         <p>{t("p1", { name: SITE.fullName, city: SITE.city })}</p>
         <p>{t("p2")}</p>
       </div>
       <div className="mt-8 rounded-2xl border border-line p-6 text-sm">
         <p className="font-medium">{t("visitTitle")}</p>
-        <p className="mt-2 text-muted">
+        <p className="mt-2 text-muted-ink">
           {SITE.city} · {SITE.phone} · {SITE.instagram}
         </p>
       </div>

@@ -99,6 +99,11 @@ export function AddToCartForm({
       lensOption,
       rx,
     })
+
+    // dejar el formulario listo para un pedido nuevo
+    setLensOption("FRAME_ONLY")
+    setRxLater(false)
+    setRxForm(emptyRxForm)
     setAdded(true)
     setTimeout(() => setAdded(false), 2500)
   }
@@ -111,7 +116,7 @@ export function AddToCartForm({
   return (
     <form onSubmit={handleSubmit} className="mt-6">
       <fieldset>
-        <legend className="mb-2 text-xs font-medium uppercase tracking-widest text-muted">
+        <legend className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-ink">
           {tl("title")}
         </legend>
         <div className="grid gap-2 sm:grid-cols-2">
@@ -135,13 +140,13 @@ export function AddToCartForm({
               <span>
                 <span className="block font-medium">
                   {tl(option.id)}{" "}
-                  <span className="text-muted">
+                  <span className="text-muted-ink">
                     {option.priceCents === 0
                       ? tl("free")
                       : `+${formatPrice(option.priceCents)}`}
                   </span>
                 </span>
-                <span className="block text-xs text-muted">{tl(`${option.id}_desc`)}</span>
+                <span className="block text-xs text-muted-ink">{tl(`${option.id}_desc`)}</span>
               </span>
             </label>
           ))}
@@ -150,7 +155,7 @@ export function AddToCartForm({
 
       {needsRx && (
         <div className="mt-4 rounded-xl border border-line p-4">
-          <p className="text-xs font-medium uppercase tracking-widest text-muted">
+          <p className="text-xs font-medium uppercase tracking-widest text-muted-ink">
             {tr("title")}
           </p>
 
@@ -164,14 +169,14 @@ export function AddToCartForm({
             {tr("later")}
           </label>
           {rxLater ? (
-            <p className="mt-1 text-xs text-muted">{tr("laterHint")}</p>
+            <p className="mt-1 text-xs text-muted-ink">{tr("laterHint")}</p>
           ) : (
             <div className="mt-3 space-y-3">
               <div className="grid grid-cols-[auto_1fr_1fr_1fr] items-center gap-2 text-sm">
                 <span />
-                <span className="text-xs text-muted">{tr("sph")}</span>
-                <span className="text-xs text-muted">{tr("cyl")}</span>
-                <span className="text-xs text-muted">{tr("axis")}</span>
+                <span className="text-xs text-muted-ink">{tr("sph")}</span>
+                <span className="text-xs text-muted-ink">{tr("cyl")}</span>
+                <span className="text-xs text-muted-ink">{tr("axis")}</span>
                 {EYES.map((eye) => (
                   <div key={eye} className="contents">
                     <span className="text-xs font-medium">{tr(eye)}</span>
@@ -212,7 +217,7 @@ export function AddToCartForm({
                     </option>
                   ))}
                 </select>
-                <span className="text-xs text-muted">{tr("pdHint")}</span>
+                <span className="text-xs text-muted-ink">{tr("pdHint")}</span>
               </div>
               {invalidPaths.length > 0 && (
                 <p role="alert" className="text-sm text-red-600 dark:text-red-400">

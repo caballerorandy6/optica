@@ -47,7 +47,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${fraunces.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col bg-paper text-ink">
         <NextIntlClientProvider>
           <CartProvider>
             <Header />

@@ -27,7 +27,7 @@ export function FrameCard({ frame }: { frame: FrameListItem }) {
             className="frame-photo object-contain p-4 transition-transform duration-300 group-hover:scale-[1.04]"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-sm text-muted">
+          <div className="flex h-full items-center justify-center text-sm text-muted-ink">
             {t("photoSoon")}
           </div>
         )}
@@ -39,7 +39,7 @@ export function FrameCard({ frame }: { frame: FrameListItem }) {
       </div>
       <div className="flex flex-1 flex-col gap-1 p-4">
         {collection && (
-          <p className="text-xs uppercase tracking-widest text-muted">{collection.name}</p>
+          <p className="text-xs uppercase tracking-widest text-muted-ink">{collection.name}</p>
         )}
         <p className="font-display text-lg leading-snug">{frame.name}</p>
         <div className="mt-auto flex items-center justify-between pt-2">
@@ -54,7 +54,7 @@ export function FrameCard({ frame }: { frame: FrameListItem }) {
               />
             ))}
             {frame.variants.length > 4 && (
-              <span className="text-xs text-muted">+{frame.variants.length - 4}</span>
+              <span className="text-xs text-muted-ink">+{frame.variants.length - 4}</span>
             )}
           </div>
         </div>

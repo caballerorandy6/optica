@@ -15,7 +15,7 @@ export function LocaleSwitcher() {
       href={pathname}
       locale={other}
       aria-label={t("switchLocale")}
-      className="rounded-full border border-line px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-muted transition-colors hover:border-accent hover:text-ink"
+      className="rounded-full border border-line px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-muted-ink transition-colors hover:border-accent hover:text-ink"
     >
       {other}
     </Link>

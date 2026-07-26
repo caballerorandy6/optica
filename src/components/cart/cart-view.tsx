@@ -45,8 +45,8 @@ function CartLine({ item }: { item: CartItem }) {
             <Link href={`/frames/${item.slug}`} className="font-display text-lg">
               {item.name}
             </Link>
-            <p className="text-sm text-muted">{colorName}</p>
-            <p className="text-sm text-muted">
+            <p className="text-sm text-muted-ink">{colorName}</p>
+            <p className="text-sm text-muted-ink">
               {tl(item.lensOption)}
               {lensExtra > 0 && ` (+${formatPrice(lensExtra)})`}
             </p>
@@ -83,7 +83,7 @@ function CartLine({ item }: { item: CartItem }) {
           <button
             type="button"
             onClick={() => removeItem(item)}
-            className="text-sm text-muted underline underline-offset-4 hover:text-ink"
+            className="text-sm text-muted-ink underline underline-offset-4 hover:text-ink"
           >
             {t("remove")}
           </button>
@@ -156,7 +156,7 @@ export function CartView() {
           <p className="font-medium">{t("subtotal")}</p>
           <p className="font-display text-2xl">{formatPrice(subtotalCents)}</p>
         </div>
-        <p className="mt-1 text-xs text-muted">{t("shippingNote")}</p>
+        <p className="mt-1 text-xs text-muted-ink">{t("shippingNote")}</p>
         <button
           type="button"
           onClick={handleCheckout}
@@ -170,7 +170,7 @@ export function CartView() {
             {error}
           </p>
         )}
-        <p className="mt-2 text-center text-xs text-muted">{t("secureNote")}</p>
+        <p className="mt-2 text-center text-xs text-muted-ink">{t("secureNote")}</p>
       </aside>
     </div>
   )

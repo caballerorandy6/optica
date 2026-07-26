@@ -34,7 +34,7 @@ function Chip({
       className={
         active
           ? "rounded-full border border-accent bg-accent px-3 py-1 text-sm text-accent-ink"
-          : "rounded-full border border-line px-3 py-1 text-sm text-muted transition-colors hover:border-accent hover:text-ink"
+          : "rounded-full border border-line px-3 py-1 text-sm text-muted-ink transition-colors hover:border-accent hover:text-ink"
       }
     >
       {children}
@@ -58,7 +58,7 @@ export function CatalogFilters({
   return (
     <aside aria-label={t("filtersLabel")} className="space-y-5">
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted">
+        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-ink">
           {t("collection")}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -78,7 +78,7 @@ export function CatalogFilters({
       </div>
 
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted">
+        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-ink">
           {t("material")}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -98,7 +98,7 @@ export function CatalogFilters({
       </div>
 
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted">
+        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-ink">
           {t("color")}
         </p>
         <div className="flex flex-wrap gap-2">

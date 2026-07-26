@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 import { ClearCart } from "@/components/cart/clear-cart"
 import { Link } from "@/i18n/navigation"
 import { prisma } from "@/lib/prisma"
+import { formatOrderNumber } from "@/lib/shipping"
 import { getStripe } from "@/lib/stripe"
 
 type Params = Promise<{ locale: string }>
@@ -50,14 +51,22 @@ export default async function CheckoutSuccessPage({
         {t("successTitle")}
       </h1>
       {order ? (
-        <p className="mt-3 max-w-md text-muted">
-          {t("successOrder", { number: order.number })}
-          {order.email && ` ${t("successEmail", { email: order.email })}`}
-        </p>
+        <>
+          <p className="mt-3 max-w-md text-muted-ink">
+            {t("successOrder", { number: formatOrderNumber(order.number) })}
+            {order.email && ` ${t("successEmail", { email: order.email })}`}
+          </p>
+          <Link
+            href={`/track?order=${1000 + order.number}&email=${encodeURIComponent(order.email)}`}
+            className="mt-2 text-sm text-accent underline underline-offset-4"
+          >
+            {t("trackCta")}
+          </Link>
+        </>
       ) : (
-        <p className="mt-3 max-w-md text-muted">{t("successGeneric")}</p>
+        <p className="mt-3 max-w-md text-muted-ink">{t("successGeneric")}</p>
       )}
-      <p className="mt-2 max-w-md text-sm text-muted">{t("successRxNote")}</p>
+      <p className="mt-2 max-w-md text-sm text-muted-ink">{t("successRxNote")}</p>
       <Link
         href="/frames"
         className="mt-8 rounded-full bg-accent px-6 py-3 font-medium text-accent-ink transition-opacity hover:opacity-90"

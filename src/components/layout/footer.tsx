@@ -15,11 +15,11 @@ export function Footer() {
             {SITE.name}
             <span className="text-amber">.</span>
           </p>
-          <p className="mt-2 text-sm text-muted">{t("tagline", { city: SITE.city })}</p>
+          <p className="mt-2 text-sm text-muted-ink">{t("tagline", { city: SITE.city })}</p>
         </div>
         <nav aria-label={ta("footerNav")} className="text-sm">
           <p className="mb-2 font-medium">{t("shop")}</p>
-          <ul className="space-y-1 text-muted">
+          <ul className="space-y-1 text-muted-ink">
             <li>
               <Link href="/frames" className="hover:text-ink">
                 {t("allFrames")}
@@ -30,16 +30,21 @@ export function Footer() {
                 {t("bestsellers")}
               </Link>
             </li>
+            <li>
+              <Link href="/track" className="hover:text-ink">
+                {t("track")}
+              </Link>
+            </li>
           </ul>
         </nav>
-        <div className="text-sm text-muted">
+        <div className="text-sm text-muted-ink">
           <p className="mb-2 font-medium text-ink">{t("contact")}</p>
           <p>{SITE.city}</p>
           <p>{SITE.phone}</p>
           <p>{SITE.instagram}</p>
         </div>
       </div>
-      <div className="border-t border-line py-4 text-center text-xs text-muted">
+      <div className="border-t border-line py-4 text-center text-xs text-muted-ink">
         © {new Date().getFullYear()} {SITE.fullName}. {t("rights")}
       </div>
     </footer>

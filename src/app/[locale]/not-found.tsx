@@ -9,7 +9,7 @@ export default function NotFound() {
     <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-center justify-center px-4 py-24 text-center">
       <p className="font-display text-7xl font-medium text-accent">404</p>
       <h1 className="mt-4 font-display text-3xl font-medium">{t("title")}</h1>
-      <p className="mt-2 max-w-md text-muted">{t("message")}</p>
+      <p className="mt-2 max-w-md text-muted-ink">{t("message")}</p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Link
           href="/"

@@ -28,7 +28,7 @@ export default async function Home() {
           <h1 className="mt-4 max-w-3xl font-display text-5xl font-medium leading-tight tracking-tight sm:text-7xl">
             {t("titleStart")} <em className="text-accent">{t("titleAccent")}</em>
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-muted">{t("sub")}</p>
+          <p className="mt-5 max-w-xl text-lg text-muted-ink">{t("sub")}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/frames"
@@ -73,7 +73,7 @@ export default async function Home() {
                 href={`/frames?collection=${c.slug}`}
                 className="rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-accent hover:text-accent"
               >
-                {c.name} <span className="text-muted">({c._count.products})</span>
+                {c.name} <span className="text-muted-ink">({c._count.products})</span>
               </Link>
             ))}
           </div>
@@ -84,7 +84,7 @@ export default async function Home() {
         {values.map((v) => (
           <div key={v.title}>
             <h3 className="font-display text-xl font-medium">{v.title}</h3>
-            <p className="mt-1 text-sm text-muted">{v.detail}</p>
+            <p className="mt-1 text-sm text-muted-ink">{v.detail}</p>
           </div>
         ))}
       </section>

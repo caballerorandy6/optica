@@ -57,7 +57,7 @@ export function FrameGallery({
               className="frame-photo object-contain p-6"
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-muted">
+            <div className="flex h-full items-center justify-center text-muted-ink">
               {t("photoSoon")}
             </div>
           )}
@@ -91,7 +91,7 @@ export function FrameGallery({
         {children}
         {variants.length > 0 && (
           <fieldset>
-            <legend className="mb-2 text-xs font-medium uppercase tracking-widest text-muted">
+            <legend className="mb-2 text-xs font-medium uppercase tracking-widest text-muted-ink">
               {t("colorLabel", { color: colorName(variant) })}
             </legend>
             <div className="flex flex-wrap gap-2">
@@ -120,7 +120,7 @@ export function FrameGallery({
         )}
 
         {variant?.size && (
-          <p className="mt-4 text-sm text-muted">
+          <p className="mt-4 text-sm text-muted-ink">
             {t("size")} <span className="font-medium text-ink">{variant.size}</span>{" "}
             {t("sizeUnits")}
           </p>
@@ -129,7 +129,7 @@ export function FrameGallery({
           <p className="mt-2 text-sm text-amber">{t("lowStock", { count: variant.stock })}</p>
         )}
         {variant && variant.stock === 0 && (
-          <p className="mt-2 text-sm text-muted">{t("outOfStock")}</p>
+          <p className="mt-2 text-sm text-muted-ink">{t("outOfStock")}</p>
         )}
 
         <AddToCartForm product={product} variant={variant} />

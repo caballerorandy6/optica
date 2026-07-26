@@ -8,6 +8,7 @@ import { SITE } from "@/lib/constants"
 export function Header() {
   const t = useTranslations("Header")
   const ta = useTranslations("A11y")
+  const demoMode = process.env.DEMO_MODE === "1"
 
   return (
     <header className="sticky top-0 z-40">
@@ -23,18 +24,26 @@ export function Header() {
             <span className="text-amber">.</span>
           </Link>
           <nav aria-label={ta("mainNav")} className="hidden gap-6 text-sm sm:flex">
-            <Link href="/frames" className="text-muted transition-colors hover:text-ink">
+            <Link href="/frames" className="text-muted-ink transition-colors hover:text-ink">
               {t("frames")}
             </Link>
             <Link
               href="/frames?featured=1"
-              className="text-muted transition-colors hover:text-ink"
+              className="text-muted-ink transition-colors hover:text-ink"
             >
               {t("bestsellers")}
             </Link>
-            <Link href="/about" className="text-muted transition-colors hover:text-ink">
+            <Link href="/about" className="text-muted-ink transition-colors hover:text-ink">
               {t("about")}
             </Link>
+            {demoMode && (
+              <a
+                href="/admin"
+                className="rounded-full border border-dashed border-amber px-2.5 text-amber transition-colors hover:bg-amber hover:text-white"
+              >
+                Admin
+              </a>
+            )}
           </nav>
           <div className="flex items-center gap-2">
             <LocaleSwitcher />

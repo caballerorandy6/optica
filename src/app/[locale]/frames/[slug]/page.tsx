@@ -47,7 +47,7 @@ export default async function FramePage({ params }: { params: Params }) {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10">
-      <nav aria-label={ta("breadcrumb")} className="mb-6 text-sm text-muted">
+      <nav aria-label={ta("breadcrumb")} className="mb-6 text-sm text-muted-ink">
         <Link href="/frames" className="hover:text-ink">
           {t("framesCrumb")}
         </Link>
@@ -75,19 +75,19 @@ export default async function FramePage({ params }: { params: Params }) {
       >
         <div className="mb-6">
           {collection && (
-            <p className="text-xs uppercase tracking-widest text-muted">{collection.name}</p>
+            <p className="text-xs uppercase tracking-widest text-muted-ink">{collection.name}</p>
           )}
           <h1 className="mt-1 font-display text-4xl font-medium tracking-tight">
             {frame.name}
           </h1>
           <p className="mt-3 text-2xl">{formatPrice(frame.priceCents)}</p>
           {materialName && (
-            <p className="mt-1 text-sm text-muted">
+            <p className="mt-1 text-sm text-muted-ink">
               {t("material", { material: materialName })}
             </p>
           )}
           {frame.description && (
-            <p className="mt-4 max-w-prose text-sm leading-relaxed text-muted">
+            <p className="mt-4 max-w-prose text-sm leading-relaxed text-muted-ink">
               {frame.description}
             </p>
           )}
