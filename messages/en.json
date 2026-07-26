@@ -96,7 +96,19 @@
     "subtotal": "Subtotal",
     "shippingNote": "Shipping and taxes are calculated at checkout.",
     "checkout": "Proceed to checkout",
-    "checkoutSoon": "Online payment lands in the next milestone."
+    "checkoutLoading": "Redirecting to payment…",
+    "secureNote": "Secure payment powered by Stripe.",
+    "errorGeneric": "We couldn't start the payment. Please try again.",
+    "errorUnavailable": "An item in your cart is no longer available.",
+    "errorStock": "There isn't enough stock for an item in your cart."
+  },
+  "Checkout": {
+    "successTitle": "Thank you for your purchase!",
+    "successOrder": "Your order #{number} is confirmed.",
+    "successEmail": "We sent the receipt to {email}.",
+    "successGeneric": "Your payment was received and your order is confirmed.",
+    "successRxNote": "If you chose to send your prescription later, we'll reach out soon to take it.",
+    "backToShop": "Keep shopping"
   },
   "Lens": {
     "title": "Lenses",

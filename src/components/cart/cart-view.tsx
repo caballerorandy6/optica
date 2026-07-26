@@ -1,7 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import {
   type CartItem,
@@ -10,6 +11,7 @@ import {
   useCart,
 } from "@/components/cart/cart-context"
 import { Link } from "@/i18n/navigation"
+import { createCheckoutSession } from "@/lib/checkout"
 import { formatPrice } from "@/lib/format"
 
 function CartLine({ item }: { item: CartItem }) {
@@ -91,9 +93,38 @@ function CartLine({ item }: { item: CartItem }) {
   )
 }
 
+const ERROR_KEYS = {
+  INVALID: "errorGeneric",
+  UNAVAILABLE: "errorUnavailable",
+  OUT_OF_STOCK: "errorStock",
+} as const
+
 export function CartView() {
   const t = useTranslations("Cart")
+  const locale = useLocale() as "es" | "en"
   const { items, subtotalCents } = useCart()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  async function handleCheckout() {
+    setLoading(true)
+    setError(null)
+    const result = await createCheckoutSession({
+      locale,
+      items: items.map((i) => ({
+        variantId: i.variantId,
+        lensOption: i.lensOption,
+        qty: i.qty,
+        rx: i.rx,
+      })),
+    })
+    if ("url" in result) {
+      window.location.href = result.url
+    } else {
+      setError(t(ERROR_KEYS[result.error]))
+      setLoading(false)
+    }
+  }
 
   if (items.length === 0) {
     return (
@@ -128,12 +159,18 @@ export function CartView() {
         <p className="mt-1 text-xs text-muted">{t("shippingNote")}</p>
         <button
           type="button"
-          disabled
-          className="mt-5 w-full cursor-not-allowed rounded-full bg-accent px-6 py-3 font-medium text-accent-ink opacity-60"
+          onClick={handleCheckout}
+          disabled={loading}
+          className="mt-5 w-full rounded-full bg-accent px-6 py-3 font-medium text-accent-ink transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
         >
-          {t("checkout")}
+          {loading ? t("checkoutLoading") : t("checkout")}
         </button>
-        <p className="mt-2 text-center text-xs text-muted">{t("checkoutSoon")}</p>
+        {error && (
+          <p role="alert" className="mt-2 text-center text-sm text-red-600 dark:text-red-400">
+            {error}
+          </p>
+        )}
+        <p className="mt-2 text-center text-xs text-muted">{t("secureNote")}</p>
       </aside>
     </div>
   )

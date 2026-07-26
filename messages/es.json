@@ -96,7 +96,19 @@
     "subtotal": "Subtotal",
     "shippingNote": "Envío e impuestos se calculan al pagar.",
     "checkout": "Proceder al pago",
-    "checkoutSoon": "El pago en línea llega en el siguiente hito."
+    "checkoutLoading": "Redirigiendo al pago…",
+    "secureNote": "Pago seguro procesado por Stripe.",
+    "errorGeneric": "No pudimos iniciar el pago. Intenta de nuevo.",
+    "errorUnavailable": "Un artículo de tu carrito ya no está disponible.",
+    "errorStock": "No hay stock suficiente de un artículo de tu carrito."
+  },
+  "Checkout": {
+    "successTitle": "¡Gracias por tu compra!",
+    "successOrder": "Tu pedido #{number} está confirmado.",
+    "successEmail": "Enviamos el comprobante a {email}.",
+    "successGeneric": "Tu pago fue recibido y tu pedido está confirmado.",
+    "successRxNote": "Si elegiste enviar tu fórmula después, te contactaremos pronto para tomarla.",
+    "backToShop": "Seguir comprando"
   },
   "Lens": {
     "title": "Micas",
