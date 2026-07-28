@@ -103,6 +103,16 @@
     "errorUnavailable": "An item in your cart is no longer available.",
     "errorStock": "There isn't enough stock for an item in your cart."
   },
+  "TryOn": {
+    "button": "Try them on with your camera",
+    "title": "Virtual try-on",
+    "close": "Close virtual try-on",
+    "loading": "Loading the virtual try-on… please allow camera access.",
+    "error": "We couldn't access your camera. Check your browser permissions and try again.",
+    "disclaimer": "Approximate preview: the shape shown is an illustrative model in your selected color, not the exact frame. Your video never leaves your device.",
+    "sizeToggle": "This frame's real size ({size} mm)",
+    "sizeToggleHint": "Turn it off to compare with the standard size and see the difference."
+  },
   "Track": {
     "metaTitle": "Track your order",
     "title": "Track your order",

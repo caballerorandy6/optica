@@ -53,6 +53,20 @@ type CapriProduct = {
 
 const stripHtml = (html: string) => html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
 
+/** pa_shape de Capri → enum Shape del schema. */
+function mapShape(term: string | undefined) {
+  if (!term) return null
+  const t = term.toLowerCase()
+  if (t.includes('round')) return 'ROUND' as const
+  if (t.includes('oval')) return 'OVAL' as const
+  if (t.includes('square')) return 'SQUARE' as const
+  if (t.includes('rectangle')) return 'RECTANGLE' as const
+  if (t.includes('cat')) return 'CATEYE' as const
+  if (t.includes('navigator') || t.includes('aviator')) return 'AVIATOR' as const
+  if (t.includes('browline')) return 'BROWLINE' as const
+  return 'OTHER' as const
+}
+
 function attrTerms(p: CapriProduct, taxonomy: string): CapriTerm[] {
   return p.attributes.find((a) => a.taxonomy === taxonomy)?.terms ?? []
 }
@@ -94,6 +108,7 @@ async function importProducts() {
       const sizeTerm = attrTerms(p, 'pa_size')[0]?.name ?? null
       const colors = attrTerms(p, 'pa_color')
       const material = attrTerms(p, 'pa_material')[0]?.name ?? null
+      const shape = mapShape(attrTerms(p, 'pa_shape')[0]?.name)
 
       const product = await prisma.product.upsert({
         where: { capriId: p.id },
@@ -102,6 +117,7 @@ async function importProducts() {
           slug: p.slug,
           sku,
           material,
+          shape,
           description: stripHtml(p.short_description || p.description || ''),
         },
         create: {
@@ -110,6 +126,7 @@ async function importProducts() {
           slug: p.slug,
           sku,
           material,
+          shape,
           description: stripHtml(p.short_description || p.description || ''),
         },
       })

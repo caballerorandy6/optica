@@ -103,6 +103,16 @@
     "errorUnavailable": "Un artículo de tu carrito ya no está disponible.",
     "errorStock": "No hay stock suficiente de un artículo de tu carrito."
   },
+  "TryOn": {
+    "button": "Pruébatelos con tu cámara",
+    "title": "Prueba virtual",
+    "close": "Cerrar prueba virtual",
+    "loading": "Cargando la prueba virtual… acepta el permiso de cámara.",
+    "error": "No pudimos acceder a tu cámara. Revisa los permisos del navegador e intenta de nuevo.",
+    "disclaimer": "Vista previa aproximada: la forma mostrada es un modelo ilustrativo con el color elegido, no la montura exacta. Tu video no sale de tu dispositivo.",
+    "sizeToggle": "Tamaño real de esta montura ({size} mm)",
+    "sizeToggleHint": "Desactívalo para comparar con la talla estándar y ver la diferencia."
+  },
   "Track": {
     "metaTitle": "Rastrear pedido",
     "title": "Rastrea tu pedido",

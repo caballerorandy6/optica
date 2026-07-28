@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useTranslations } from "next-intl"
 
 import { AddToCartForm } from "@/components/product/add-to-cart-form"
+import { TryOnButton } from "@/components/product/try-on"
 import { swatchBackground } from "@/lib/colors"
 
 type GalleryImage = { id: string; url: string; alt: string }
@@ -23,7 +24,13 @@ export function FrameGallery({
   variants,
   children,
 }: {
-  product: { id: string; slug: string; name: string; priceCents: number }
+  product: {
+    id: string
+    slug: string
+    name: string
+    priceCents: number
+    shape?: string | null
+  }
   images: GalleryImage[]
   variants: GalleryVariant[]
   children?: React.ReactNode
@@ -118,6 +125,11 @@ export function FrameGallery({
             </div>
           </fieldset>
         )}
+
+        <TryOnButton
+          colorHex={variant ? swatchBackground(variant.colorSlug) : "#232326"}
+          size={variant?.size}
+        />
 
         {variant?.size && (
           <p className="mt-4 text-sm text-muted-ink">

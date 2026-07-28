@@ -69,6 +69,7 @@ export default async function FramePage({ params }: { params: Params }) {
           slug: frame.slug,
           name: frame.name,
           priceCents: frame.priceCents,
+          shape: frame.shape,
         }}
         images={frame.images}
         variants={frame.variants}
