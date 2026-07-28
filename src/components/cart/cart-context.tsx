@@ -93,7 +93,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => prev.filter((i) => lineKey(i) !== lineKey(item)))
   }, [])
 
-  const clear = useCallback(() => setItems([]), [])
+  const clear = useCallback(() => {
+    setItems([])
+    // borrar también el storage: el efecto de hidratación del provider corre
+    // DESPUÉS que el de ClearCart (React ejecuta efectos de hijos primero) y
+    // si la clave sigue ahí, "resucita" el carrito recién vaciado
+    localStorage.removeItem(STORAGE_KEY)
+  }, [])
 
   const value = useMemo<CartContextValue>(() => {
     const count = items.reduce((sum, i) => sum + i.qty, 0)

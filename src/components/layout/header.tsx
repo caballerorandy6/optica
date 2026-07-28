@@ -1,7 +1,9 @@
+import { Suspense } from "react"
 import { useTranslations } from "next-intl"
 
 import { CartButton } from "@/components/cart/cart-button"
 import { LocaleSwitcher } from "@/components/layout/locale-switcher"
+import { NavLinks } from "@/components/layout/nav-links"
 import { Link } from "@/i18n/navigation"
 import { SITE } from "@/lib/constants"
 
@@ -23,19 +25,10 @@ export function Header() {
             {SITE.name}
             <span className="text-amber">.</span>
           </Link>
-          <nav aria-label={ta("mainNav")} className="hidden gap-6 text-sm sm:flex">
-            <Link href="/frames" className="text-muted-ink transition-colors hover:text-ink">
-              {t("frames")}
-            </Link>
-            <Link
-              href="/frames?featured=1"
-              className="text-muted-ink transition-colors hover:text-ink"
-            >
-              {t("bestsellers")}
-            </Link>
-            <Link href="/about" className="text-muted-ink transition-colors hover:text-ink">
-              {t("about")}
-            </Link>
+          <nav aria-label={ta("mainNav")} className="hidden items-center gap-6 text-sm sm:flex">
+            <Suspense fallback={null}>
+              <NavLinks />
+            </Suspense>
             {demoMode && (
               <a
                 href="/admin"

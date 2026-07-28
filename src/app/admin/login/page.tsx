@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -22,7 +24,7 @@ export default async function AdminLoginPage({
     process.env.DEMO_MODE === "1" ? process.env.ADMIN_PASSWORD : null
 
   return (
-    <main className="flex flex-1 items-center justify-center p-4">
+    <main className="flex flex-1 flex-col items-center justify-center gap-4 p-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="font-display text-3xl font-semibold tracking-tight">
@@ -65,6 +67,12 @@ export default async function AdminLoginPage({
           )}
         </CardContent>
       </Card>
+      <Link
+        href="/"
+        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        ← Volver a la tienda
+      </Link>
     </main>
   )
 }
