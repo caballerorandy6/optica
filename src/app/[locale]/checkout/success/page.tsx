@@ -13,7 +13,7 @@ type SearchParams = Promise<{ session_id?: string }>
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "Checkout" })
-  return { title: t("successTitle") }
+  return { title: t("successTitle"), robots: { index: false, follow: false } }
 }
 
 async function getPaidOrder(sessionId: string) {

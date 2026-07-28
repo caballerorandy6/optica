@@ -8,7 +8,7 @@ type Params = Promise<{ locale: string }>
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "Cart" })
-  return { title: t("title") }
+  return { title: t("title"), robots: { index: false, follow: true } }
 }
 
 export default async function CartPage() {

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 
 import { SITE } from "@/lib/constants"
 import { prisma } from "@/lib/prisma"
+import { pageAlternates } from "@/lib/seo"
 import { CARRIERS, formatOrderNumber, isCarrier, trackingUrl } from "@/lib/shipping"
 
 type Params = Promise<{ locale: string }>
@@ -11,7 +12,7 @@ type SearchParams = Promise<{ order?: string; email?: string }>
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "Track" })
-  return { title: t("metaTitle") }
+  return { title: t("metaTitle"), alternates: pageAlternates(locale, "/track") }
 }
 
 async function findOrder(orderInput: string, email: string) {

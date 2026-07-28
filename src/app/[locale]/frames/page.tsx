@@ -5,6 +5,7 @@ import { CatalogFilters, catalogHref } from "@/components/catalog/catalog-filter
 import { FrameCard } from "@/components/catalog/frame-card"
 import { Link } from "@/i18n/navigation"
 import { type CatalogFilters as Filters, getFilterOptions, getFrames } from "@/lib/catalog"
+import { pageAlternates } from "@/lib/seo"
 
 type Params = Promise<{ locale: string }>
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
@@ -12,7 +13,12 @@ type SearchParams = Promise<Record<string, string | string[] | undefined>>
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "Catalog" })
-  return { title: t("metaTitle"), description: t("metaDescription") }
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: pageAlternates(locale, "/frames"),
+    openGraph: { title: t("metaTitle"), description: t("metaDescription") },
+  }
 }
 
 function parseFilters(params: Record<string, string | string[] | undefined>): Filters {

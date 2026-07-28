@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 
 import { Link } from "@/i18n/navigation"
 import { SITE } from "@/lib/constants"
+import { pageAlternates } from "@/lib/seo"
 
 type Params = Promise<{ locale: string }>
 
@@ -12,6 +13,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return {
     title: t("metaTitle"),
     description: t("metaDescription", { name: SITE.fullName, city: SITE.city }),
+    alternates: pageAlternates(locale, "/about"),
   }
 }
 

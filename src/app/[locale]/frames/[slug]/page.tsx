@@ -7,6 +7,7 @@ import { FrameGallery } from "@/components/product/frame-gallery"
 import { Link } from "@/i18n/navigation"
 import { getFrameBySlug, getFrames } from "@/lib/catalog"
 import { formatPrice } from "@/lib/format"
+import { pageAlternates, SITE_URL } from "@/lib/seo"
 
 type Params = Promise<{ locale: string; slug: string }>
 
@@ -17,11 +18,19 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     getFrameBySlug(slug),
   ])
   if (!frame) return { title: t("notFound") }
+  const description =
+    frame.description ||
+    t("metaDescription", { name: frame.name, count: frame.variants.length })
   return {
     title: `${frame.name} — ${formatPrice(frame.priceCents)}`,
-    description:
-      frame.description ||
-      t("metaDescription", { name: frame.name, count: frame.variants.length }),
+    description,
+    alternates: pageAlternates(locale, `/frames/${frame.slug}`),
+    openGraph: {
+      title: frame.name,
+      description,
+      images: frame.images[0] ? [{ url: frame.images[0].url }] : undefined,
+    },
+    twitter: { card: "summary_large_image" },
   }
 }
 
@@ -45,8 +54,36 @@ export default async function FramePage({ params }: { params: Params }) {
     : { frames: [] }
   const relatedFrames = related.filter((f) => f.id !== frame.id).slice(0, 4)
 
+  // solo datos reales del sistema — nada inventado (sin ratings ni reviews)
+  const inStock = frame.variants.some((v) => v.stock > 0)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: frame.name,
+    sku: frame.sku,
+    ...(frame.images[0] && { image: frame.images[0].url }),
+    ...(frame.description && { description: frame.description }),
+    ...(collection && { brand: { "@type": "Brand", name: collection.name } }),
+    offers: {
+      "@type": "Offer",
+      url: `${SITE_URL}/frames/${frame.slug}`,
+      priceCurrency: "USD",
+      price: (frame.priceCents / 100).toFixed(2),
+      availability: inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+    },
+  }
+
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <nav aria-label={ta("breadcrumb")} className="mb-6 text-sm text-muted-ink">
         <Link href="/frames" className="hover:text-ink">
           {t("framesCrumb")}

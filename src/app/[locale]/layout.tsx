@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
@@ -10,6 +10,7 @@ import { CartProvider } from "@/components/cart/cart-context";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { routing } from "@/i18n/routing";
+import { ogLocale, pageAlternates, SITE_URL } from "@/lib/seo";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -21,6 +22,13 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fbf8f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#1b1712" },
+  ],
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -29,8 +37,23 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
   return {
+    metadataBase: new URL(SITE_URL),
     title: { default: t("title"), template: "%s — MIRA Eyewear" },
     description: t("description"),
+    alternates: pageAlternates(locale, "/"),
+    openGraph: {
+      type: "website",
+      siteName: "MIRA Eyewear",
+      locale: ogLocale(locale),
+      title: t("title"),
+      description: t("description"),
+      url: pageAlternates(locale, "/").canonical as string,
+    },
+    twitter: {
+      card: "summary",
+      title: t("title"),
+      description: t("description"),
+    },
   };
 }
 
