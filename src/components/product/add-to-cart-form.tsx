@@ -220,7 +220,7 @@ export function AddToCartForm({
                 <span className="text-xs text-muted-ink">{tr("pdHint")}</span>
               </div>
               {invalidPaths.length > 0 && (
-                <p role="alert" className="text-sm text-red-600 dark:text-red-400">
+                <p role="alert" className="text-sm text-danger">
                   {tr("error")}
                 </p>
               )}

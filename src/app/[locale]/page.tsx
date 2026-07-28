@@ -63,7 +63,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-white/40 dark:bg-white/5">
+      <section className="border-y border-line bg-surface">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h2 className="font-display text-3xl font-medium">{t("collectionsTitle")}</h2>
           <div className="mt-6 flex flex-wrap gap-3">

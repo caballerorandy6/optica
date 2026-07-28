@@ -12,6 +12,8 @@
   --ink: #261f18;
   --mira-muted: #6f6458;
   --mira-accent: #33584a;
+  --mira-surface: #ffffff;
+  --mira-danger: #b3372e;
   --muted: #f2efe9;
   --accent: #e9efeb;
   --accent-ink: #fbf8f2;
@@ -65,6 +67,8 @@
     --ink: #f0e9dd;
     --mira-muted: #a2957f;
     --mira-accent: #8fb8a4;
+    --mira-surface: #262019;
+    --mira-danger: #ef9086;
     --accent-ink: #16211c;
     --amber: #d9a250;
     --line: #372f26;
@@ -81,6 +85,8 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-muted-ink: var(--mira-muted);
+  --color-surface: var(--mira-surface);
+  --color-danger: var(--mira-danger);
   --color-accent: var(--mira-accent);
   --color-accent-ink: var(--accent-ink);
   --color-warning-fg: var(--warning-fg);
