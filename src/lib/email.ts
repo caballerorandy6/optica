@@ -144,6 +144,27 @@ export async function sendOrderConfirmation(order: EmailOrder): Promise<void> {
   await send(order.email, t.confirmSubject(n), html)
 }
 
+/** Aviso interno de nueva venta al administrador (ADMIN_EMAIL). Siempre en español. */
+export async function sendNewOrderNotification(
+  order: EmailOrder & { phone?: string | null },
+  pendingRx: boolean,
+): Promise<void> {
+  const adminEmail = process.env.ADMIN_EMAIL
+  if (!adminEmail) return
+  const n = formatOrderNumber(order.number)
+  const items = order.items
+    .map((i) => `<li>${i.quantity} × ${i.nameSnapshot}</li>`)
+    .join("")
+  const html = layout(
+    `Nueva venta ${n} — ${formatPrice(order.totalCents)}`,
+    `<p style="margin:0 0 8px;font-size:15px">Cliente: <strong>${order.name || "—"}</strong> · ${order.email}${order.phone ? ` · ${order.phone}` : ""}</p>
+     <ul style="margin:0 0 8px;padding-left:18px;font-size:14px">${items}</ul>
+     ${pendingRx ? `<p style="margin:0 0 8px;font-size:13px;color:#8a5c10"><strong>⚠ Fórmula pendiente</strong> — contactar al cliente.</p>` : ""}
+     ${button(`${siteUrl()}/admin/orders`, "Ver en el panel")}`,
+  )
+  await send(adminEmail, `🛍 Nueva venta ${n} — ${formatPrice(order.totalCents)}`, html)
+}
+
 export async function sendOrderShipped(order: EmailOrder): Promise<void> {
   if (!order.email) return
   const locale = localeOf(order)

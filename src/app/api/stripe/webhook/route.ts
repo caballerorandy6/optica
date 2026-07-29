@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import type Stripe from "stripe"
 
-import { sendOrderConfirmation } from "@/lib/email"
+import { sendNewOrderNotification, sendOrderConfirmation } from "@/lib/email"
 import { prisma } from "@/lib/prisma"
 import { getStripe } from "@/lib/stripe"
 
@@ -54,7 +54,13 @@ export async function POST(request: Request) {
         where: { id: orderId },
         include: { items: true },
       })
-      if (order) await sendOrderConfirmation(order)
+      if (order) {
+        const pendingRx = order.items.some(
+          (i) => i.lensOption !== "FRAME_ONLY" && !i.rxData,
+        )
+        await sendOrderConfirmation(order)
+        await sendNewOrderNotification(order, pendingRx)
+      }
     }
   }
 
