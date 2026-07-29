@@ -35,6 +35,7 @@ async function fetchJson<T>(url: string, tries = 3): Promise<T> {
 }
 
 type CapriTerm = { id: number; name: string; slug: string }
+type CapriVariationDetail = { id: number; images: CapriImage[] }
 type CapriAttribute = { name: string; taxonomy: string | null; terms: CapriTerm[] }
 type CapriImage = { src: string; alt: string }
 type CapriCategory = { id: number; name: string; slug: string; count: number }
@@ -143,31 +144,64 @@ async function importProducts() {
         },
       })
 
-      // imágenes: reemplazo completo para reflejar el estado actual de Capri
+      // cada variación (color) es un producto hijo en Capri CON SU PROPIA FOTO;
+      // se consultan una a una porque su Store API no las devuelve en lote.
+      // OJO: el listado entrega el color como SLUG ("light-blue"), no el nombre
+      const colorImages = new Map<string, string>() // color SLUG → foto
+      for (const v of p.variations ?? []) {
+        const colorSlug = v.attributes.find((a) => a.name === 'Color')?.value
+        if (!colorSlug) continue
+        try {
+          await sleep(100) // cortesía con el servidor de Capri
+          const detail = await fetchJson<CapriVariationDetail>(`${BASE}/products/${v.id}`)
+          const src = detail.images?.[0]?.src
+          if (src) colorImages.set(colorSlug, src)
+        } catch {
+          // sin foto de esa variación: caerá al fallback del padre
+        }
+      }
+
+      // imágenes del producto: las del padre + una por color, sin duplicados
+      const galleryUrls = new Set<string>()
+      const gallery: { url: string; alt: string }[] = []
+      for (const img of p.images) {
+        if (!galleryUrls.has(img.src)) {
+          galleryUrls.add(img.src)
+          gallery.push({ url: img.src, alt: img.alt || p.name })
+        }
+      }
+      for (const color of colors) {
+        const src = colorImages.get(color.slug)
+        if (src && !galleryUrls.has(src)) {
+          galleryUrls.add(src)
+          gallery.push({ url: src, alt: `${p.name} — ${color.name}` })
+        }
+      }
       await prisma.productImage.deleteMany({ where: { productId: product.id } })
       await prisma.productImage.createMany({
-        data: p.images.map((img, i) => ({
+        data: gallery.map((img, i) => ({
           productId: product.id,
-          url: img.src,
-          alt: img.alt || `${p.name}`,
+          url: img.url,
+          alt: img.alt,
           position: i,
         })),
       })
 
       for (const color of colors) {
+        const imageUrl =
+          colorImages.get(color.slug) ??
+          imageForColor(p.images, color.name) ??
+          p.images[0]?.src ??
+          null
         await prisma.variant.upsert({
           where: { productId_colorSlug: { productId: product.id, colorSlug: color.slug } },
-          update: {
-            color: color.name,
-            size: sizeTerm,
-            imageUrl: imageForColor(p.images, color.name) ?? p.images[0]?.src ?? null,
-          },
+          update: { color: color.name, size: sizeTerm, imageUrl },
           create: {
             productId: product.id,
             color: color.name,
             colorSlug: color.slug,
             size: sizeTerm,
-            imageUrl: imageForColor(p.images, color.name) ?? p.images[0]?.src ?? null,
+            imageUrl,
           },
         })
       }

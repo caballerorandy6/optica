@@ -57,6 +57,8 @@
     "colorFilter": "Filtrar por color {color}"
   },
   "Card": {
+    "colorsLabel": "Colores",
+    "sizeLabel": "Medidas",
     "bestseller": "Más vendida",
     "photoSoon": "Foto próximamente",
     "colorsAvailable": "{count, plural, one {# color disponible} other {# colores disponibles}}"
@@ -162,6 +164,8 @@
     "sph": "Esfera (SPH)",
     "cyl": "Cilindro (CYL)",
     "axis": "Eje",
+    "add": "Adición (ADD)",
+    "axisNeedsCyl": "El eje solo aplica si eliges un cilindro (astigmatismo)",
     "none": "—",
     "pd": "Distancia pupilar (PD)",
     "pdHint": "Si no la sabes, 63 es el promedio adulto.",

@@ -10,6 +10,7 @@ const eyeSchema = z
     sph: z.coerce.number().min(-20).max(20).multipleOf(0.25),
     cyl: optionalMeasure(z.coerce.number().min(-6).max(6).multipleOf(0.25)),
     axis: optionalMeasure(z.coerce.number().int().min(1).max(180)),
+    add: optionalMeasure(z.coerce.number().min(0.75).max(4).multipleOf(0.25)),
   })
   .superRefine((eye, ctx) => {
     // CYL y eje van en pareja: un cilindro sin orientación no se puede fabricar

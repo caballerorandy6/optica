@@ -44,6 +44,24 @@ export function FrameCard({ frame }: { frame: FrameListItem }) {
           </p>
         )}
         <p className="font-display text-lg font-medium leading-snug text-ink">{frame.name}</p>
+        <p className="text-xs text-muted-ink">
+          <span className="text-[10px] font-semibold uppercase tracking-wider">
+            {t("colorsLabel")}:
+          </span>{" "}
+          {frame.variants
+            .slice(0, 3)
+            .map((v) => (tc.has(v.colorSlug) ? tc(v.colorSlug) : v.color))
+            .join(" · ")}
+          {frame.variants.length > 3 && ` +${frame.variants.length - 3}`}
+        </p>
+        {frame.variants[0]?.size && (
+          <p className="text-xs text-muted-ink">
+            <span className="text-[10px] font-semibold uppercase tracking-wider">
+              {t("sizeLabel")}:
+            </span>{" "}
+            {frame.variants[0].size.replace(/\s/g, "")}
+          </p>
+        )}
         <div className="mt-auto flex items-center justify-between pt-3">
           <p className="text-base font-semibold text-ink">{formatPrice(frame.priceCents)}</p>
           <div className="flex items-center gap-1.5" aria-hidden="true">

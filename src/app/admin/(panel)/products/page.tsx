@@ -1,21 +1,32 @@
 import Image from "next/image"
 import Link from "next/link"
-import type { Prisma } from "@prisma/client"
 
+import { BulkPriceDialog } from "@/components/admin/bulk-price-dialog"
 import { ProductRowControls } from "@/components/admin/product-row-controls"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  buildProductsWhere,
+  parseProductsFilter,
+  type ProductsFilter,
+} from "@/lib/admin-products-filter"
 import { prisma } from "@/lib/prisma"
 
 const PER_PAGE = 50
 
-type SearchParams = Promise<{ q?: string; status?: string; page?: string }>
+type SearchParams = Promise<{
+  q?: string
+  status?: string
+  collection?: string
+  page?: string
+}>
 
-function adminHref(q: string, status: string, page: number): string {
+function adminHref(f: ProductsFilter, page: number): string {
   const params = new URLSearchParams()
-  if (q) params.set("q", q)
-  if (status !== "all") params.set("status", status)
+  if (f.q) params.set("q", f.q)
+  if (f.status !== "all") params.set("status", f.status)
+  if (f.collection) params.set("collection", f.collection)
   if (page > 1) params.set("page", String(page))
   const qs = params.toString()
   return qs ? `/admin/products?${qs}` : "/admin/products"
@@ -27,22 +38,11 @@ export default async function AdminProductsPage({
   searchParams: SearchParams
 }) {
   const sp = await searchParams
-  const q = sp.q?.trim() ?? ""
-  const status = sp.status === "published" || sp.status === "draft" ? sp.status : "all"
+  const filter = parseProductsFilter(sp)
   const page = Math.max(1, Number(sp.page) || 1)
+  const where = buildProductsWhere(filter)
 
-  const where: Prisma.ProductWhereInput = {
-    ...(q && {
-      OR: [
-        { name: { contains: q, mode: "insensitive" } },
-        { sku: { contains: q, mode: "insensitive" } },
-      ],
-    }),
-    ...(status === "published" && { published: true }),
-    ...(status === "draft" && { published: false }),
-  }
-
-  const [products, total] = await Promise.all([
+  const [products, total, collections] = await Promise.all([
     prisma.product.findMany({
       where,
       orderBy: [{ published: "desc" }, { name: "asc" }],
@@ -55,30 +55,66 @@ export default async function AdminProductsPage({
       },
     }),
     prisma.product.count({ where }),
+    prisma.category.findMany({
+      where: { slug: { not: "case" } },
+      orderBy: { name: "asc" },
+      select: { name: true, slug: true },
+    }),
   ])
   const pages = Math.ceil(total / PER_PAGE)
+
+  const activeCollection = collections.find((c) => c.slug === filter.collection)
+  const filterLabel =
+    [
+      filter.status === "published"
+        ? "publicadas"
+        : filter.status === "draft"
+          ? "sin publicar"
+          : "todas",
+      activeCollection && `colección ${activeCollection.name}`,
+      filter.q && `búsqueda "${filter.q}"`,
+    ]
+      .filter(Boolean)
+      .join(", ") || "todas"
 
   return (
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-2xl font-semibold">Productos</h1>
-        <p className="text-sm text-muted-foreground">
-          {total} {total === 1 ? "montura" : "monturas"}
-        </p>
+        <div className="flex items-center gap-3">
+          <p className="text-sm text-muted-foreground">
+            {total} {total === 1 ? "montura" : "monturas"}
+          </p>
+          <BulkPriceDialog filter={filter} total={total} filterLabel={filterLabel} />
+        </div>
       </div>
 
       <div className="mb-4 flex flex-wrap items-center gap-3">
-        <form action="/admin/products" className="flex gap-2">
+        <form action="/admin/products" className="flex flex-wrap gap-2">
           <Input
             type="search"
             name="q"
-            defaultValue={q}
+            defaultValue={filter.q}
             placeholder="Buscar por nombre o SKU…"
-            className="w-64"
+            className="w-56"
           />
-          {status !== "all" && <input type="hidden" name="status" value={status} />}
+          <select
+            name="collection"
+            defaultValue={filter.collection}
+            className="h-9 rounded-lg border border-input bg-transparent px-2 text-sm"
+          >
+            <option value="">Todas las colecciones</option>
+            {collections.map((c) => (
+              <option key={c.slug} value={c.slug}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+          {filter.status !== "all" && (
+            <input type="hidden" name="status" value={filter.status} />
+          )}
           <Button type="submit" variant="secondary">
-            Buscar
+            Filtrar
           </Button>
         </form>
         <div className="flex gap-1">
@@ -93,15 +129,15 @@ export default async function AdminProductsPage({
               key={value}
               asChild
               size="sm"
-              variant={status === value ? "default" : "outline"}
+              variant={filter.status === value ? "default" : "outline"}
             >
-              <Link href={adminHref(q, value, 1)}>{label}</Link>
+              <Link href={adminHref({ ...filter, status: value }, 1)}>{label}</Link>
             </Button>
           ))}
         </div>
       </div>
 
-      <ul className="divide-y rounded-lg border">
+      <ul className="divide-y rounded-lg border bg-card">
         {products.map((p) => (
           <li
             key={p.id}
@@ -143,7 +179,7 @@ export default async function AdminProductsPage({
         <nav aria-label="Paginación" className="mt-6 flex items-center justify-center gap-3">
           {page > 1 && (
             <Button asChild variant="outline" size="sm">
-              <Link href={adminHref(q, status, page - 1)}>← Anterior</Link>
+              <Link href={adminHref(filter, page - 1)}>← Anterior</Link>
             </Button>
           )}
           <span className="text-sm text-muted-foreground">
@@ -151,7 +187,7 @@ export default async function AdminProductsPage({
           </span>
           {page < pages && (
             <Button asChild variant="outline" size="sm">
-              <Link href={adminHref(q, status, page + 1)}>Siguiente →</Link>
+              <Link href={adminHref(filter, page + 1)}>Siguiente →</Link>
             </Button>
           )}
         </nav>

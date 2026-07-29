@@ -51,7 +51,8 @@ function rxLine(rx: RxData): string {
   const eye = (label: string, e: RxData["od"]) =>
     `${label}: SPH ${e.sph >= 0 ? "+" : ""}${e.sph.toFixed(2)}` +
     (e.cyl ? ` · CYL ${Number(e.cyl).toFixed(2)}` : "") +
-    (e.axis ? ` · EJE ${e.axis}°` : "")
+    (e.axis ? ` · EJE ${e.axis}°` : "") +
+    (e.add ? ` · ADD +${Number(e.add).toFixed(2)}` : "")
   return `${eye("OD", rx.od)}  |  ${eye("OI", rx.os)}  |  DP ${rx.pd} mm`
 }
 

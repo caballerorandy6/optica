@@ -57,6 +57,8 @@
     "colorFilter": "Filter by color {color}"
   },
   "Card": {
+    "colorsLabel": "Colors",
+    "sizeLabel": "Size",
     "bestseller": "Bestseller",
     "photoSoon": "Photo coming soon",
     "colorsAvailable": "{count, plural, one {# color available} other {# colors available}}"
@@ -162,6 +164,8 @@
     "sph": "Sphere (SPH)",
     "cyl": "Cylinder (CYL)",
     "axis": "Axis",
+    "add": "Addition (ADD)",
+    "axisNeedsCyl": "Axis only applies if you choose a cylinder (astigmatism)",
     "none": "—",
     "pd": "Pupillary distance (PD)",
     "pdHint": "If you don't know it, 63 is the adult average.",

@@ -42,6 +42,31 @@ export async function updateProduct(
   return { ok: true }
 }
 
+const bulkPriceSchema = z.object({
+  q: z.string().max(100),
+  status: z.enum(["all", "published", "draft"]),
+  collection: z.string().max(100),
+  priceCents: z.number().int().min(100).max(500_000),
+})
+
+/** Aplica un precio a TODAS las monturas del filtro actual (no solo la página visible). */
+export async function bulkSetPrice(
+  input: z.infer<typeof bulkPriceSchema>,
+): Promise<{ ok: boolean; count?: number; error?: string }> {
+  await requireAdmin()
+  const parsed = bulkPriceSchema.safeParse(input)
+  if (!parsed.success) return { ok: false, error: "Datos inválidos" }
+  const { priceCents, ...filter } = parsed.data
+
+  const { buildProductsWhere } = await import("@/lib/admin-products-filter")
+  const { count } = await prisma.product.updateMany({
+    where: buildProductsWhere(filter),
+    data: { priceCents },
+  })
+  revalidatePath("/admin/products")
+  return { ok: true, count }
+}
+
 const shipOrderSchema = z.object({
   id: z.string().min(1),
   carrier: z.enum(["USPS", "UPS", "FEDEX", "LOCAL"]),
