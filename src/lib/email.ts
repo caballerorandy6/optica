@@ -57,7 +57,7 @@ function siteUrl(): string {
 }
 
 function trackPageUrl(order: EmailOrder, locale: Locale): string {
-  const prefix = locale === "es" ? "" : "/en"
+  const prefix = locale === "en" ? "" : "/es"
   const params = `order=${1000 + order.number}&email=${encodeURIComponent(order.email)}`
   return `${siteUrl()}${prefix}/track?${params}`
 }
@@ -125,7 +125,7 @@ async function send(to: string, subject: string, html: string): Promise<void> {
 }
 
 function localeOf(order: EmailOrder): Locale {
-  return order.locale === "en" ? "en" : "es"
+  return order.locale === "es" ? "es" : "en"
 }
 
 export async function sendOrderConfirmation(order: EmailOrder): Promise<void> {

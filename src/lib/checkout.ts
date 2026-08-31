@@ -82,7 +82,7 @@ export async function createCheckoutSession(input: CheckoutInput): Promise<Check
 
   const h = await headers()
   const origin = `${h.get("x-forwarded-proto") ?? "https"}://${h.get("host")}`
-  const prefix = locale === "es" ? "" : `/${locale}`
+  const prefix = locale === "en" ? "" : `/${locale}`
 
   const session = await getStripe().checkout.sessions.create({
     mode: "payment",

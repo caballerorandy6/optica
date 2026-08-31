@@ -4,12 +4,12 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:30
 
 function localePath(locale: string, path: string): string {
   const clean = path === "/" ? "" : path
-  return locale === "es" ? clean || "/" : `/en${clean}`
+  return locale === "en" ? clean || "/" : `/es${clean}`
 }
 
 /**
  * Canonical + hreflang para una ruta en el locale actual.
- * Español vive en la raíz (x-default); inglés bajo /en.
+ * Inglés vive en la raíz (x-default); español bajo /es.
  */
 export function pageAlternates(
   locale: string,
@@ -20,7 +20,7 @@ export function pageAlternates(
     languages: {
       es: localePath("es", path),
       en: localePath("en", path),
-      "x-default": localePath("es", path),
+      "x-default": localePath("en", path),
     },
   }
 }

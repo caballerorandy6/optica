@@ -3,6 +3,9 @@ import type { MetadataRoute } from "next"
 import { prisma } from "@/lib/prisma"
 import { SITE_URL } from "@/lib/seo"
 
+// ISR mensual, igual que las páginas del catálogo
+export const revalidate = 2592000 // 30 días
+
 function entry(
   path: string,
   lastModified: Date | undefined,
@@ -14,8 +17,8 @@ function entry(
     priority,
     alternates: {
       languages: {
-        es: `${SITE_URL}${path === "/" ? "" : path}` || SITE_URL,
-        en: `${SITE_URL}/en${path === "/" ? "" : path}`,
+        en: `${SITE_URL}${path === "/" ? "" : path}` || SITE_URL,
+        es: `${SITE_URL}/es${path === "/" ? "" : path}`,
       },
     },
   }
