@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import NextLink from "next/link"
 import { useTranslations } from "next-intl"
 
 import { CartButton } from "@/components/cart/cart-button"
@@ -30,12 +31,12 @@ export function Header() {
               <NavLinks />
             </Suspense>
             {demoMode && (
-              <a
+              <NextLink
                 href="/admin"
                 className="rounded-full border border-dashed border-amber px-2.5 text-amber transition-colors hover:bg-amber hover:text-white"
               >
                 Admin
-              </a>
+              </NextLink>
             )}
           </nav>
           <div className="flex items-center gap-2">

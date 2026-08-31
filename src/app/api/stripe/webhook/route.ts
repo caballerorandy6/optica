@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache"
 import { NextResponse } from "next/server"
 import type Stripe from "stripe"
 
@@ -49,6 +50,8 @@ export async function POST(request: Request) {
           data: { stock: { decrement: item.quantity } },
         })
       }
+      // el stock cambió: purgar las páginas públicas cacheadas (ISR de 30 días)
+      revalidatePath("/", "layout")
 
       const order = await prisma.order.findUnique({
         where: { id: orderId },

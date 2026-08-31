@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // librerías de terceros vendorizadas (Jeeliz + three.js del try-on)
+    "public/vto/**",
   ]),
 ]);
 

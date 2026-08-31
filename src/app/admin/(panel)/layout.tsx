@@ -4,6 +4,10 @@ import { AdminNav } from "@/components/admin/admin-nav"
 import { Button } from "@/components/ui/button"
 import { logoutAdmin } from "@/lib/admin-auth"
 
+// el panel siempre lee datos frescos de la BD (sin esto, /admin se
+// prerenderiza en el build y las estadísticas quedan congeladas)
+export const dynamic = "force-dynamic"
+
 export default function AdminPanelLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {

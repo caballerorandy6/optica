@@ -1,11 +1,21 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { FrameCard } from "@/components/catalog/frame-card";
 import { Link } from "@/i18n/navigation";
 import { getFilterOptions, getFrames } from "@/lib/catalog";
 import { SITE } from "@/lib/constants";
 
-export default async function Home() {
+// ISR mensual: el admin invalida la caché al editar productos (revalidatePath)
+export const revalidate = 2592000; // 30 días
+
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const [t, { frames: featured }, { collections }] = await Promise.all([
     getTranslations("Home"),
     getFrames({ featured: true }),

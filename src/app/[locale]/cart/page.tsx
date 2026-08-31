@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { CartView } from "@/components/cart/cart-view"
 
@@ -11,7 +11,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return { title: t("title"), robots: { index: false, follow: true } }
 }
 
-export default async function CartPage() {
+export default async function CartPage({ params }: { params: Params }) {
+  const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations("Cart")
 
   return (

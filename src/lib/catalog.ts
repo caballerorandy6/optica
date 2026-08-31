@@ -1,3 +1,4 @@
+import { cache } from "react"
 import type { Prisma } from "@prisma/client"
 
 import { prisma } from "@/lib/prisma"
@@ -76,7 +77,8 @@ export async function getFilterOptions() {
   }
 }
 
-export async function getFrameBySlug(slug: string) {
+// cache(): generateMetadata y la página piden el mismo producto en un render
+export const getFrameBySlug = cache(async (slug: string) => {
   return prisma.product.findUnique({
     where: { slug, published: true },
     include: {
@@ -85,4 +87,13 @@ export async function getFrameBySlug(slug: string) {
       categories: { select: { name: true, slug: true } },
     },
   })
+})
+
+export async function getPublishedSlugs() {
+  const products = await prisma.product.findMany({
+    where: { published: true },
+    select: { slug: true },
+    orderBy: { slug: "asc" },
+  })
+  return products.map((p) => p.slug)
 }

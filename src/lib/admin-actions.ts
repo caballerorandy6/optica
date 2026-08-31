@@ -39,6 +39,8 @@ export async function updateProduct(
 
   await prisma.product.update({ where: { id }, data })
   revalidatePath("/admin/products")
+  // purgar la tienda pública (ISR de 30 días) para reflejar el cambio ya
+  revalidatePath("/", "layout")
   return { ok: true }
 }
 
@@ -64,6 +66,8 @@ export async function bulkSetPrice(
     data: { priceCents },
   })
   revalidatePath("/admin/products")
+  // purgar la tienda pública (ISR de 30 días) para reflejar el cambio ya
+  revalidatePath("/", "layout")
   return { ok: true, count }
 }
 

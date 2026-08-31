@@ -1,15 +1,24 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getTranslations } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { FrameCard } from "@/components/catalog/frame-card"
 import { FrameGallery } from "@/components/product/frame-gallery"
 import { Link } from "@/i18n/navigation"
-import { getFrameBySlug, getFrames } from "@/lib/catalog"
+import { getFrameBySlug, getFrames, getPublishedSlugs } from "@/lib/catalog"
 import { formatPrice } from "@/lib/format"
 import { pageAlternates, SITE_URL } from "@/lib/seo"
 
 type Params = Promise<{ locale: string; slug: string }>
+
+// ISR mensual: el admin y el webhook de Stripe invalidan la caché al cambiar
+// precios, publicación o stock (revalidatePath)
+export const revalidate = 2592000 // 30 días
+
+export async function generateStaticParams() {
+  const slugs = await getPublishedSlugs()
+  return slugs.map((slug) => ({ slug }))
+}
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale, slug } = await params
@@ -35,7 +44,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export default async function FramePage({ params }: { params: Params }) {
-  const { slug } = await params
+  const { locale, slug } = await params
+  setRequestLocale(locale)
   const [t, ta, tm, frame] = await Promise.all([
     getTranslations("Product"),
     getTranslations("A11y"),

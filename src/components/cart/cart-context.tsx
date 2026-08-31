@@ -60,6 +60,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
+      // hidratación única desde un sistema externo: el doble render es intencional
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (raw) setItems(JSON.parse(raw))
     } catch {
       // carrito corrupto: empezar vacío
